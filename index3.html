@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correio do Cupido - Correio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="correio.css">
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
+      <img src="img/logo.png" width="200">
+    </a>
+    <h1>Descubra tudo sobre o amor</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="index2.html">Sobre</a>
+    <a href="index3.html" class="ativo">Correio</a>
+  </nav>
+
+  <main class="container">
+    <section class="correio-section">
+      <h2>💌 Escreva sua carta de amor</h2>
+      <p>Preencha os campos abaixo, gere o seu link e compartilhe com quem você ama!</p>
+
+      <form class="correio-form" id="formCorreio">
+        <div class="campo">
+          <label for="remetente">✍️ Seu nome</label>
+          <input type="text" id="remetente" name="remetente" placeholder="Quem está enviando?" maxlength="50" required>
+        </div>
+
+        <div class="campo">
+          <label for="destinatario">💝 Nome de quem vai receber</label>
+          <input type="text" id="destinatario" name="destinatario" placeholder="Para quem é a carta?" maxlength="50"
+            required>
+        </div>
+
+        <div class="campo">
+          <label for="mensagem">💬 Sua mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="6" placeholder="Escreva aqui sua declaração de amor..."
+            maxlength="500" required></textarea>
+          <span class="contador" id="contador">0 / 500</span>
+        </div>
+
+        <button type="button" class="btn-gerar" onclick="gerarLink()">Enviar Carta 💌</button>
+      </form>
+
+      <div class="link-gerado" id="linkGerado" style="display:none;">
+        <h3>✅ Link gerado com sucesso!</h3>
+        <p>Copie o link abaixo e envie para a pessoa especial:</p>
+        <div class="link-box">
+          <input type="text" id="linkFinal" readonly>
+          <button onclick="copiarLink()">Copiar</button>
+        </div>
+        <span class="copiado" id="msgCopiado">Link copiado! ❤️</span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Eduardo Tatsuo | Universidade Católica de Brasília (UCB) | 2026</p>
+  </footer>
+
+  <script>
+    const textarea = document.getElementById('mensagem');
+    const contador = document.getElementById('contador');
+
+    textarea.addEventListener('input', function () {
+      contador.textContent = this.value.length + ' / 500';
+    });
+
+    function gerarLink() {
+      const remetente = document.getElementById('remetente').value.trim();
+      const destinatario = document.getElementById('destinatario').value.trim();
+      const mensagem = document.getElementById('mensagem').value.trim();
+      // ❌ Removido: const tema = document.getElementById('tema').value;
+
+      if (!remetente || !destinatario || !mensagem) {
+        alert('Por favor, preencha todos os campos!');
+        return;
+      }
+
+      const base = window.location.href.replace('index3.html', '');
+      const params = new URLSearchParams({ de: remetente, para: destinatario, msg: mensagem });
+      const link = base + 'carta.html?' + params.toString();
+
+      document.getElementById('linkFinal').value = link;
+      document.getElementById('linkGerado').style.display = 'block';
+      document.getElementById('msgCopiado').style.display = 'none';
+      document.getElementById('linkGerado').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copiarLink() {
+      const input = document.getElementById('linkFinal');
+      input.select();
+      document.execCommand('copy');
+      document.getElementById('msgCopiado').style.display = 'inline';
+    }
+  </script>
+</body>
+
+</html>

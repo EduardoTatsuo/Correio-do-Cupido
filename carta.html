@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Correio do Cupido - Sua Carta</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="correio.css">
+</head>
+
+<body>
+  <header>
+    <a href="index.html">
+      <img src="img/logo.png" width="200">
+    </a>
+    <h1>Descubra tudo sobre o amor</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="index2.html">Sobre</a>
+    <a href="index3.html">Correio</a>
+  </nav>
+
+  <main class="container">
+    <section class="carta-section" id="cartaSection">
+      <div class="carta-envelope" id="cartaEnvelope">
+        <div class="carta-topo" id="cartaTopo">
+          <span class="carta-icone" id="cartaIcone">❤️</span>
+          <p class="carta-para" id="cartaPara">Carregando...</p>
+        </div>
+
+        <div class="carta-corpo">
+          <p class="carta-mensagem" id="cartaMensagem"></p>
+        </div>
+
+        <div class="carta-rodape">
+          <p class="carta-assinatura">Com amor, <strong id="cartaDe"></strong> 💕</p>
+        </div>
+      </div>
+
+      <div class="carta-acoes">
+        <a href="index3.html" class="btn-cta">Escrever minha carta ❤️</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Eduardo Tatsuo | Universidade Católica de Brasília (UCB) | 2026</p>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const de = params.get('de') || 'Anônimo';
+    const para = params.get('para') || 'Você';
+    const msg = params.get('msg') || 'Nenhuma mensagem encontrada.';
+
+    document.getElementById('cartaPara').textContent = 'Para: ' + para;
+    document.getElementById('cartaMensagem').textContent = msg;
+    document.getElementById('cartaDe').textContent = de;
+    document.title = 'Uma carta para ' + para + ' 💌';
+  </script>
+</body>
+
+</html>
